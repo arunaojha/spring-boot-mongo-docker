@@ -3,15 +3,15 @@ node{
     stage('SCM Checkout'){
         git credentialsId: 'gittoken', url: 'https://github.com/arunaojha/spring-boot-mongo-docker.git'
     }
-    /**
+    
     stage(" Maven Clean Package"){
-      def mavenHome =  tool name: "Maven-3.6.1", type: "maven"
+      def mavenHome =  tool name: "maven3.9.9", type: "maven"
       def mavenCMD = "${mavenHome}/bin/mvn"
       sh "${mavenCMD} clean package"
       
     } 
     
-    
+    /**
     stage('Build Docker Image'){
         sh 'docker build -t dockerhandson/spring-boot-mongo .'
     }
