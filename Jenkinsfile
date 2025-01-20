@@ -11,18 +11,17 @@ node{
       
     } 
     
-    /**
     stage('Build Docker Image'){
-        sh 'docker build -t dockerhandson/spring-boot-mongo .'
+        sh 'docker build -t arunaojha/spring-boot-mongo .'
     }
     
     stage('Push Docker Image'){
-        withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
-          sh "docker login -u dockerhandson -p ${DOKCER_HUB_PASSWORD}"
+        withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: '')]) {
+          sh "docker login -u arunaojha -p ${DOKCER_HUB_PASSWORD}"
         }
-        sh 'docker push dockerhandson/spring-boot-mongo'
+        sh 'docker push arunaojha/spring-boot-mongo'
      }
-     
+     /**
      stage("Deploy To Kuberates Cluster"){
        kubernetesDeploy(
          configs: 'springBootMongo.yml', 
